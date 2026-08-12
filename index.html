@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finanço — Controle de gastos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <header class="topbar"><div><p class="eyebrow">SEU PAINEL FINANCEIRO</p><h1>Controle de gastos</h1><p class="subtitle">Clareza para cada escolha do seu dia.</p></div><div class="brand-mark">F</div></header>
+    <section class="cards-resumo" aria-label="Resumo financeiro">
+      <div class="card total"><span class="label">Total geral</span><strong id="total-geral">R$ 0,00</strong><span class="card-hint">Todos os gastos</span></div>
+      <div class="card pix"><span class="label">Pix</span><strong id="total-pix">R$ 0,00</strong><span class="card-hint">Pagamento instantâneo</span></div>
+      <div class="card credito"><span class="label">Crédito</span><strong id="total-credito">R$ 0,00</strong><span class="card-hint">Cartão de crédito</span></div>
+      <div class="card debito"><span class="label">Débito</span><strong id="total-debito">R$ 0,00</strong><span class="card-hint">Cartão de débito</span></div>
+    </section>
+    <section class="panel form-section"><div class="section-heading"><div><p class="eyebrow">LANÇAMENTO</p><h2 id="form-titulo">Adicionar gasto</h2></div><button id="btn-cancelar" class="btn-link hidden" type="button">Cancelar edição</button></div>
+      <form id="form-gasto"><div class="form-row"><div class="form-group"><label for="descricao">Descrição</label><input type="text" id="descricao" maxlength="120" placeholder="Ex: Mercado" required></div><div class="form-group small"><label for="valor">Valor (R$)</label><input type="number" id="valor" step="0.01" min="0.01" placeholder="0,00" required></div></div>
+      <div class="form-row"><div class="form-group"><label for="categoria">Categoria</label><input type="text" id="categoria" maxlength="60" placeholder="Ex: Alimentação"></div><div class="form-group small"><label for="data">Data</label><input type="date" id="data" required></div></div>
+      <fieldset><legend>Método de pagamento</legend><div class="metodo-opcoes"><label class="opcao-metodo"><input type="radio" name="metodo" value="pix" checked><span>↗ Pix</span></label><label class="opcao-metodo"><input type="radio" name="metodo" value="credito"><span>▣ Crédito</span></label><label class="opcao-metodo"><input type="radio" name="metodo" value="debito"><span>◈ Débito</span></label></div></fieldset>
+      <button id="btn-submit" class="btn-primary" type="submit">Adicionar gasto</button></form>
+    </section>
+    <section class="panel lista-section"><div class="section-heading"><div><p class="eyebrow">MOVIMENTAÇÕES</p><h2>Gastos registrados</h2></div><span id="contador" class="counter">0 lançamentos</span></div>
+      <div class="filtros"><input id="filtro-busca" type="search" placeholder="Buscar gasto..." aria-label="Buscar gasto"><select id="filtro-metodo" aria-label="Filtrar por método"><option value="">Todos os métodos</option><option value="pix">Pix</option><option value="credito">Crédito</option><option value="debito">Débito</option></select><select id="filtro-periodo" aria-label="Filtrar por período"><option value="">Todo o período</option><option value="mes">Este mês</option><option value="7dias">Últimos 7 dias</option></select></div>
+      <div id="mensagem-vazia" class="vazio">Nenhum gasto encontrado.</div><ul id="lista-gastos"></ul>
+    </section>
+  </main><div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body></html>
